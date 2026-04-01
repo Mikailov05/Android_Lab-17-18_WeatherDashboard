@@ -9,7 +9,7 @@ class WeatherRepository{
         return Random.nextInt(15,35)
     }
 
-    suspend fun fetchHumidiry():Int{
+    suspend fun fetchHumidity():Int{
         delay(1500)
         return Random.nextInt(40,80)
 
