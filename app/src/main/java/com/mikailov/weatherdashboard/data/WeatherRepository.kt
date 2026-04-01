@@ -3,22 +3,28 @@ package com.mikailov.weatherdashboard.data
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
-class WeatherRepository{
-    suspend fun fetchTemperature(): Int{
+class WeatherRepository {
+    private var shouldFail = false
+
+    fun toggleErrorSimulation() {
+        shouldFail = !shouldFail
+    }
+
+    suspend fun fetchTemperature(): Int {
         delay(2000)
-        return Random.nextInt(15,35)
+        if (shouldFail) {
+            throw Exception("Сервер недоступен")
+        }
+        return Random.nextInt(15, 35)
     }
 
-    suspend fun fetchHumidity():Int{
+    suspend fun fetchHumidity(): Int {
         delay(1500)
-        return Random.nextInt(40,80)
-
-
+        return Random.nextInt(40, 80)
     }
 
-    suspend fun fetchWindSpeed():Int{
-
+    suspend fun fetchWindSpeed(): Int {
         delay(1000)
-        return Random.nextInt(0,20)
+        return Random.nextInt(0, 20)
     }
 }
